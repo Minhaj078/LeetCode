@@ -1,13 +1,12 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        map<int,int>mpp;
-        for(int i = 0;i<nums.size();i++){
-            mpp[nums[i]]++;
+    unordered_map<int, int> mpp; // Use unordered_map for O(1) average time complexity
+        
+        for (int num : nums) {
+            if (++mpp[num] > 1) return true; // If count becomes > 1, return early
         }
-        for(auto it:mpp){
-            if(it.second > 1)return true;
-        }
+
         return false;
     }
 };
