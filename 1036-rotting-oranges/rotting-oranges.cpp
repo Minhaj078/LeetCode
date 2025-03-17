@@ -19,7 +19,9 @@ public:
                 if (grid[i][j] == 2) {
                     q.push({{i, j}, 0});
                     vis[i][j] = 2;
-                } 
+                } else {
+                    vis[i][j] = 0;
+                }
                 if (grid[i][j] == 1) cntFresh++;
             }
         }
