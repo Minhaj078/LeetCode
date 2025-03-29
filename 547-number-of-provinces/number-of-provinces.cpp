@@ -1,11 +1,10 @@
 class Solution {
 public:
-    void dfs(int node, vector<int>& vis, vector<vector<int>>& adjLs) {
+
+    void dfs(int node,vector<int>&vis,vector<vector<int>>&adjLs){
         vis[node] = 1;
-        for (auto it : adjLs[node]) {
-            if (!vis[it]) {
-                dfs(it, vis, adjLs);
-            }
+        for(auto it:adjLs[node]){
+            if(!vis[it])dfs(it,vis,adjLs);
         }
     }
 
@@ -22,18 +21,14 @@ public:
                 }
             }
         }
-
         int cnt = 0;
-        vector<int> vis(n, 0);  // Correct visit array initialization
-
-        // Count connected components
-        for (int i = 0; i < n; i++) {
-            if (!vis[i]) {
-                dfs(i, vis, adjLs);
+        vector<int>vis(n,0);
+        for(int i =0;i<n;i++){
+            if(!vis[i]){
+                dfs(i,vis,adjLs);
                 cnt++;
             }
         }
-
         return cnt;
     }
 };
