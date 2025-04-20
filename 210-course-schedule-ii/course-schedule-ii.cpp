@@ -1,46 +1,40 @@
 class Solution {
 public:
-    bool dfs(int node, vector<int>& vis, vector<vector<int>>& adj, stack<int>& st) {
-        vis[node] = 1; // 1 means currently in recursion stack
-
-        for (auto it : adj[node]) {
-            if (vis[it] == 0) {
-                if (!dfs(it, vis, adj, st)) return false;
-            }
-            else if (vis[it] == 1) {
-                // Cycle found
-                return false;
-            }
-        }
-
-        vis[node] = 2; // 2 means processed
-        st.push(node);
-        return true;
-    }
-
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<vector<int>> adj(numCourses);
-        for (auto& pre : prerequisites) {
-            adj[pre[1]].push_back(pre[0]);
+        
+        vector<int> adj[numCourses];
+        for (auto it : prerequisites) {
+            adj[it[1]].push_back(it[0]);
         }
 
-        vector<int> vis(numCourses, 0);
-        stack<int> st;
-
+        vector<int> indegree(numCourses, 0);
         for (int i = 0; i < numCourses; i++) {
-            if (vis[i] == 0) {
-                if (!dfs(i, vis, adj, st)) {
-                    return {}; // cycle found, not possible to finish all
-                }
+            for (auto it : adj[i]) {
+                indegree[it]++;
             }
         }
 
-        vector<int> ans;
-        while (!st.empty()) {
-            ans.push_back(st.top());
-            st.pop();
+        queue<int> q;
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0) q.push(i);
         }
 
-        return ans;
+        vector<int> topo;
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            topo.push_back(node);
+
+            for (auto it : adj[node]) {
+                indegree[it]--;
+                if (indegree[it] == 0) q.push(it);
+            }
+        }
+
+        // ✅ Cycle check
+        if (topo.size() == numCourses)
+            return topo;
+        else
+            return {}; // Not possible due to a cycle
     }
 };
