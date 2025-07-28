@@ -1,29 +1,29 @@
 class Solution {
 public:
     int countMaxOrSubsets(vector<int>& nums) {
-        int maxOrValue = 0;
+                int max_or = 0, count = 0;
+        int n = nums.size();
+
+        // Step 1: Calculate the maximum possible bitwise OR
         for (int num : nums) {
-            maxOrValue |= num;
-        }
-        return countSubsets(nums, 0, 0, maxOrValue);
-    }
-
-private:
-    int countSubsets(vector<int>& nums, int index, int currentOr,
-                     int targetOr) {
-        // Base case: reached the end of the array
-        if (index == nums.size()) {
-            return (currentOr == targetOr) ? 1 : 0;
+            max_or |= num;
         }
 
-        // Don't include the current number
-        int countWithout = countSubsets(nums, index + 1, currentOr, targetOr);
+        // Step 2: Iterate over all possible subsets
+        int total_subsets = 1 << n; // 2^n subsets
+        for (int mask = 1; mask < total_subsets; ++mask) {
+            int subset_or = 0;
+            for (int i = 0; i < n; ++i) {
+                if (mask & (1 << i)) { // If the ith bit is set, include nums[i] in the subset
+                    subset_or |= nums[i];
+                }
+            }
+            // Step 3: If the subset OR equals max OR, increment the count
+            if (subset_or == max_or) {
+                ++count;
+            }
+        }
 
-        // Include the current number
-        int countWith =
-            countSubsets(nums, index + 1, currentOr | nums[index], targetOr);
-
-        // Return the sum of both cases
-        return countWithout + countWith;
+        return count;
     }
 };
