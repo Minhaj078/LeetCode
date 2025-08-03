@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-    void findSubset(int indx,vector<int>&nums,vector<int>&ds,vector<vector<int>>&ans){
+    void findSubset(int indx,vector<int>&nums,vector<int>ds,vector<vector<int>>&ans){
         ans.push_back(ds);
         for(int i = indx;i<nums.size();i++){
             if(i>indx && nums[i] == nums[i-1])continue;
