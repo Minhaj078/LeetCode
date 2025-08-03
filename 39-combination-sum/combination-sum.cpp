@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-    void CSum(int indx,int target,vector<int>arr,vector<vector<int>>&ans,vector<int>&ds){
+    void csum(int indx,int target, vector<int>arr,vector<vector<int>>&ans,vector<int>ds){
         if(indx == arr.size()){
             if(target == 0){
                 ans.push_back(ds);
@@ -9,21 +9,21 @@ public:
             return;
         }
 
-        //pick the element
+        //pick
         if(arr[indx] <= target){
             ds.push_back(arr[indx]);
-            CSum(indx,target - arr[indx], arr,ans,ds);
+            csum(indx,target - arr[indx],arr,ans,ds);
             ds.pop_back();
         }
+
         //not pick
-        CSum(indx+1,target,arr,ans,ds);
+        csum(indx+1,target,arr,ans,ds);
     }
 
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<int>ds;
-        vector<vector<int>>ans;
-        CSum(0,target,candidates,ans,ds);
+        vector<vector<int>> ans;
+        csum(0,target, candidates,ans,ds);
         return ans;
-
-    }      
+    }
 };
