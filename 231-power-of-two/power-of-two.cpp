@@ -1,9 +1,8 @@
 class Solution {
 public:
     bool isPowerOfTwo(int n) {
-        for (int i = 0; i <= 31; i++) {
-        if ((1LL << i) == n) return true;
-    }
-    return false;
+    if (n <= 0) return false;
+    double x = log2(n);
+    return floor(x) == ceil(x);
     }
 };
