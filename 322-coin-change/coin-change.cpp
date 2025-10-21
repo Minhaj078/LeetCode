@@ -23,6 +23,6 @@ public:
         int n = coins.size();
         vector<vector<int>> dp(n, vector<int>(amount + 1, -1));
         int ans = fn(n - 1, amount, dp, coins);
-        return (ans >= 1e9) ? -1 : ans;
+        return (ans != 1e9) ? ans : -1;
     }
 };
