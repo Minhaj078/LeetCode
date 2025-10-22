@@ -9,7 +9,7 @@ public:
 
         if (dp[i][a] != -1) return dp[i][a];
 
-        int notTake = fn(i - 1, a, dp, coins);
+        int notTake = 0+fn(i - 1, a, dp, coins);
         int take = 1e9;
 
         if (coins[i] <= a) {
