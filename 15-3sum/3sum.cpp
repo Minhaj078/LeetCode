@@ -7,7 +7,7 @@ public:
 
         for(int i = 0;i<n;i++){
             unordered_set<int>seen;
-            if(i > 0 && nums[i] == nums[i-1])continue;
+            if(i > 0 && nums[i] == nums[i-1])continue; //and this for ensuring no duplicates numbr.
 
             for(int j = i+1;j<n;j++){
                 
@@ -17,7 +17,7 @@ public:
 
                 ans.push_back({nums[i],third,nums[j]});
 
-                while(j+1 < n && nums[j] == nums[j+1])j++;
+                while(j+1 < n && nums[j] == nums[j+1])j++; //we do this for ensuring no duplicates of triplets.
 
                 }
                 seen.insert(nums[j]);
