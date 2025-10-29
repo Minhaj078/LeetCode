@@ -7,8 +7,8 @@ public:
 
         if(dp[n] != -1)return dp[n];
 
-        int pick = nums[n]+fn(n-2,nums,dp);
         int notPick = fn(n-1,nums,dp);
+        int pick = nums[n]+fn(n-2,nums,dp);
 
         return dp[n] = max(pick, notPick);
     }
