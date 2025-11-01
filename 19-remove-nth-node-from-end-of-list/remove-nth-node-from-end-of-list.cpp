@@ -8,46 +8,35 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+
 class Solution {
 public:
-    ListNode* reverse(ListNode* head) {
-        ListNode* prev = NULL;
-        ListNode* temp = head;
-        while (temp != NULL) {
-            ListNode* forward = temp->next;
-            temp->next = prev;
-            prev = temp;
-            temp = forward;
+    int getLen(ListNode* head) {
+        int len = 0;
+        while (head != NULL) {
+            len++;
+            head = head->next;
         }
-        return prev;
+        return len;
     }
 
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        if (head == NULL || head->next == NULL) return NULL;
+        int len = getLen(head);
+        int req = len - n;
 
-        // Step 1: Reverse the list
-        ListNode* reversedHead = reverse(head);
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode* curr = dummy;
 
-        // Step 2: Delete the nth node from the start of the reversed list
-        if (n == 1) { // Special case: deleting the first node in the reversed list
-            ListNode* toDelete = reversedHead;
-            reversedHead = reversedHead->next;
-            delete toDelete;
-        } else {
-            ListNode* temp = reversedHead;
-            int count = 1;
-            while (temp->next != NULL && count < n - 1) {
-                temp = temp->next;
-                count++;
-            }
-
-            // Delete the nth node
-            ListNode* toDelete = temp->next;
-            temp->next = temp->next->next;
-            delete toDelete;
+        // move curr to the node before the one to delete
+        for (int i = 0; i < req; i++) {
+            curr = curr->next;
         }
 
-        // Step 3: Reverse the list back to its original order
-        return reverse(reversedHead);
+        // delete nth node from end
+        curr->next = curr->next->next;
+
+        return dummy->next;
     }
 };
