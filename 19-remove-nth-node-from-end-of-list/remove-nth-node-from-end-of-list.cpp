@@ -29,12 +29,10 @@ public:
         dummy->next = head;
         ListNode* curr = dummy;
 
-        // move curr to the node before the one to delete
         for (int i = 0; i < req; i++) {
             curr = curr->next;
         }
 
-        // delete nth node from end
         curr->next = curr->next->next;
 
         return dummy->next;
