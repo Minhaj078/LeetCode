@@ -1,7 +1,7 @@
 class Solution {
 public:
-
-    int fn(int i, int j, string &s, string &t, vector<vector<int >> &dp){
+    int fn(int i, int j, string &s, string &t, vector<vector<int>>&dp)
+    {
         if(j < 0)return 1;
         if(i < 0)return 0;
 
@@ -17,7 +17,7 @@ public:
         int n = s.size();
         int m = t.size();
 
-        vector<vector<int >> dp(n+1,vector<int>(m+1,-1));
-        return fn(n-1,m-1,s,t,dp);
+        vector<vector<int>>dp (n+1,vector<int>(m+1,-1));
+        return fn(n-1, m-1, s, t, dp);
     }
 };
