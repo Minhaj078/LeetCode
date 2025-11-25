@@ -1,8 +1,8 @@
 class Solution {
 public:
     int solve(int i, int j, string &a, string &b, vector<vector<int>> &dp){
-        if(i < 0) return j + 1;   // need j+1 inserts
         if(j < 0) return i + 1;   // need i+1 deletes
+        if(i < 0) return j + 1;   // need j+1 inserts
 
         if(dp[i][j] != -1) return dp[i][j];
 
