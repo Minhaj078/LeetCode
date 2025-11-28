@@ -7,7 +7,6 @@ public:
         for(int i = 0;i<prices.size();i++){
             mini = min(mini, prices[i]);
             int profit = prices[i] - mini;
-
             maxP = max(maxP,profit);
         }return maxP;
 
