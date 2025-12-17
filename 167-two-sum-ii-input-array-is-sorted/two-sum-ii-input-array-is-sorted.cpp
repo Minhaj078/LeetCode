@@ -2,17 +2,15 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
         int n = numbers.size();
-        int left = 0;
-        int right = n-1;
-
-        while(right > left){
-            int sum = numbers[left] + numbers[right];
-            if(sum == target)return {left+1, right+1};
-
-            if(sum < target)left++;
+        int left = 0, right = n-1;
+        vector<int>ans;
+        while(left< right){
+            if(numbers[left] + numbers[right] < target)left++;
+            else if(numbers[left] + numbers[right] > target) right--;
             else{
-                right--;
+                return {left + 1, right + 1};
             }
-        }return {};
+        }
+        return {};
     }
 };
