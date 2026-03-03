@@ -8,8 +8,9 @@ public:
         while(n > 0){
             int temp = n % 10;
             sum += temp * temp;
-            n/=10;
+            n /= 10;
         }
         return isHappy(sum);
     }
+
 };
