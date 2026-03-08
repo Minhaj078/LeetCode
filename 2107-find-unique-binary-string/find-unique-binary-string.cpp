@@ -1,31 +1,20 @@
 class Solution {
 public:
-    int n;
-    unordered_set<string> numsSet;
-    
-    string generate(string curr) {
-        if (curr.size() == n) {
-            if (numsSet.find(curr) == numsSet.end()) {
-                return curr;
+    string f(int n,string bin,unordered_set<string> mp){
+        if(bin.length()==n){
+            if(mp.find(bin)==mp.end()){
+                return bin;
+            }else{
+                return "";
             }
-            
-            return "";
         }
-        
-        string addZero = generate(curr + "0");
-        if (addZero.size() > 0) {
-            return addZero;
-        }
-        
-        return generate(curr + "1");
+        string res =f(n,bin + '0', mp);
+        if (!res.empty()) return res;
+        return f(n,bin + '1', mp);
     }
-    
     string findDifferentBinaryString(vector<string>& nums) {
-        n = nums.size();
-        for (string s : nums) {
-            numsSet.insert(s);
-        }
-        
-        return generate("");
+        unordered_set<string> mp(nums.begin(),nums.end());
+        string bin;
+        return f(nums.size(),bin,mp);
     }
 };
