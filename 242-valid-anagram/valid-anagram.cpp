@@ -8,6 +8,7 @@ public:
 
         for(auto p : freq){
             if(p.second != 0) return false;
+            
         }
 
         return true;
