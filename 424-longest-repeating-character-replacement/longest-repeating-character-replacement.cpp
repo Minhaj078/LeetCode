@@ -9,7 +9,7 @@ public:
 
             maxFreq = max(maxFreq, mp[s[right]]);
 
-            while((right - left + 1) - maxFreq > k){
+            while((right - left + 1) - maxFreq > k){ //mainlogic here only
                 mp[s[left]]--;
                 left++;
             }
