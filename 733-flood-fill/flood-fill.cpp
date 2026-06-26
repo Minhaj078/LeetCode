@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-    void dfs(int row,int col,int delRow[],int delCol[],vector<vector<int>>& image,vector<vector<int>>& copy,int inicolor,int color){
+    void dfs(int row,int col,int delRow[],int delCol[],vector<vector<int>>& image,int inicolor,vector<vector<int>>& copy,int color){
         copy[row][col] = color;
 
         int r = image.size();
@@ -13,7 +13,7 @@ public:
             int ncol = col + delCol[i];
 
             if(nrow >=0 && nrow<r && ncol >= 0 && ncol < c && image[nrow][ncol] == inicolor && copy[nrow][ncol] != color){
-                dfs(nrow,ncol,delRow,delCol,image,copy,inicolor,color);
+                dfs(nrow,ncol,delRow,delCol,image,inicolor,copy,color);
             }
         }
     }
@@ -25,7 +25,7 @@ public:
         int delRow[] = {-1,0,1,0};
         int delCol[] = {0,1,0,-1};
 
-        dfs(sr,sc,delRow,delCol,image,copy,inicolor,color);
+        dfs(sr,sc,delRow,delCol,image,inicolor,copy,color);
         return copy;
     }
 };
