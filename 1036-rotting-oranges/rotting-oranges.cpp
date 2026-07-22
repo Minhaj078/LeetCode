@@ -4,11 +4,10 @@ public:
         int n = grid.size();
         int m = grid[0].size();
 
-        queue<pair<pair<int,int>,int>>q;
-        vector<vector<int>>vis(n, vector<int>(m,0));
-
-        int cntF = 0, rotted = 0;
-
+        queue<pair<pair<int,int>,int>> q;
+        vector<vector<int>> vis(n,vector<int>(m,0));
+        int cntfresh = 0;
+        // {{r,c}t}
         for(int i = 0;i<n;i++){
             for(int j = 0;j<m;j++){
                 if(grid[i][j] == 2){
@@ -16,34 +15,35 @@ public:
                     vis[i][j] = 2;
                 }
                 else if(grid[i][j] == 1){
-                    cntF++;
+                    cntfresh++;
                 }
             }
         }
 
+        int dx[] = {-1,0,1,0};
+        int dy[] = {0,1,0,-1};
         int tm = 0;
-        int drow[] = {-1,0,1,0};
-        int dcol[] = {0,1,0,-1};
+        int cnt = 0;
 
         while(!q.empty()){
             int r = q.front().first.first;
             int c = q.front().first.second;
             int t = q.front().second;
-
             tm = max(tm,t);
+
             q.pop();
 
             for(int i = 0;i<4;i++){
-                int nrow = r + drow[i];
-                int ncol = c + dcol[i];
+                int nr = r + dx[i];
+                int nc = c + dy[i];
 
-                if(nrow >= 0 && nrow < n && ncol >=0 && ncol < m && vis[nrow][ncol] == 0 && grid[nrow][ncol] == 1){
-                    q.push({{nrow,ncol}, t + 1});
-                    rotted++;
-                    vis[nrow][ncol] = 2;
+                if(nr >= 0 && nr < n && nc >=0 && nc < m && grid[nr][nc] == 1 && vis[nr][nc] == 0){
+                    q.push({{nr,nc},t + 1});
+                    vis[nr][nc] = 2;
+                    cnt++;
                 }
             }
         }
-        return cntF == rotted ? tm : -1;
+        return cnt == cntfresh ? tm:-1;
     }
 };
