@@ -1,20 +1,15 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-    unordered_map<int, int> mp; // Hash map to store (num, index)
-    
-    for (int i = 0; i < nums.size(); i++) {
-        int complement = target - nums[i];
-        
-        // Check if complement exists in the hash map
-        if (mp.find(complement) != mp.end()) {
-            return {mp[complement], i}; // Return indices of complement and current element
+        unordered_map<int,int>mp;
+
+        for(int i = 0;i<nums.size();i++){
+            int need = target - nums[i];
+            if(mp.find(need) != mp.end()){
+                return {mp[need],i};
+            }
+            mp[nums[i]] = i;
         }
-        
-        // Store the current number and its index in the map
-        mp[nums[i]] = i;
+        return {};
     }
-    
-    return {}; // This case won't happen as per the problem statement
-}
 };
