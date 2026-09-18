@@ -5,20 +5,19 @@ public:
         int left = 0, right = n - 1;
 
         int leftmx = 0, rightmx = 0;
-        
         int water = 0;
 
         while(left <= right){
-            if(height[left] <= height[right]){
+            if(height[left] < height[right]){
                 if(height[left] > leftmx) leftmx = height[left];
-                else {
+                else{
                     water += leftmx - height[left];
                 }
                 left++;
             }
             else{
                 if(height[right] > rightmx) rightmx = height[right];
-                else {
+                else{
                     water += rightmx - height[right];
                 }
                 right--;
